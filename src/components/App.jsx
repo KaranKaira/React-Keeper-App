@@ -5,14 +5,18 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
+
+  //? All the notes created till now
   const [notes, setNotes] = useState([]);
 
+  //* add new note in notes array
   function addNote(newNote) {
     setNotes((prevNotes) => {
       return [...prevNotes, newNote];
     });
   }
 
+  //* delete a particular note
   function deleteNote(id) {
     setNotes((prevNotes) => {
       return prevNotes.filter((noteItem, index) => {
@@ -28,7 +32,7 @@ function App() {
       {notes.map((noteItem, index) => {
         return (
           <Note
-            key={index}
+            key={index} //* for react to render components efficiently
             id={index}
             title={noteItem.title}
             content={noteItem.content}
