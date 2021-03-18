@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
+import axios from 'axios'
+
 
 function CreateArea(props) {
-  // state for note
+   
+  //* state for note
   const [note, setNote] = useState({
     title: "",
     content: ""
   });
 
-  // initial is for tell if textarea is expanded or not
+  //* initial is to tell  if state is initial or not
   const [initial, setInitial] = useState(true);
 
   function handleChange(event) {
@@ -25,7 +28,15 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
-    props.onAdd(note);
+    
+    
+    
+    axios.post('http://localhost:5000/addNote' , note) 
+    .then(props.onAdd)
+    .catch(err=>console.log('err occured ' + err));
+    
+    
+
     setNote({
       title: "",
       content: ""
