@@ -3,6 +3,7 @@ const Note = require('../models/Note');
 
 
 router.get('/notes' , (req,res)=>{
+
     Note.find()
     .then(notes=>res.json(notes))
     .catch(err=>console.log(err));
@@ -10,6 +11,7 @@ router.get('/notes' , (req,res)=>{
 
 router.post('/addNote' , (req,res)=>{
     
+    // console.log('note added router')
     const newNote = new Note(req.body);
 
     newNote.save()
@@ -18,10 +20,12 @@ router.post('/addNote' , (req,res)=>{
 })
 
 
-router.delete('/deleteNote/:id' , (req,res)=>{
+router.delete('/delete/:id' , (req,res)=>{
+
     Note.findByIdAndDelete(req.params.id)
-    .then(()=>console.log('Note Delete'))
-    .catch((err)=>console.log(err));
+    .then(()=> res.json('deleted Note')) //! send response for the .then in App to catch 
+    .catch(err=>console.log(err));
+
 });
 
 

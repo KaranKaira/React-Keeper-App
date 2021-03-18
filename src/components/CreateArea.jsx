@@ -29,13 +29,12 @@ function CreateArea(props) {
 
   function submitNote(event) {
     
-    props.onAdd(note);
     
-    axios.post('http://localhost:5000/addNote' , note)
-    .then((response)=> console.log('note added! ' + response))
+    
+    axios.post('http://localhost:5000/addNote' , note) 
+    .then(props.onAdd)
     .catch(err=>console.log('err occured ' + err));
     
-    // window.location = '/';
     
 
     setNote({
